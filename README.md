@@ -21,7 +21,7 @@ This implementation supports:
 
 ### Owned buffer (heap)
 
-```
+```cpp
 #include "Allocator.h"
 
 Arena arena(1024 \* 1024); // 1 MB, allocated internally
@@ -43,7 +43,7 @@ auto\* vec = static\_cast<float\*>(arena.alloc(sizeof(float) \* 3, alignof(float
 
 ### Snapshot / restore (temporary scratch space)
 
-```
+```cpp
 Arena arena(65536);
 
 std::size\_t mark = arena.used();       // save position
@@ -56,7 +56,7 @@ arena.restore(mark);                   // reclaim that memory
 
 ## API
 
-```
+```cpp
 // Constructors
 Arena(std::size\_t cap);                          // owns the buffer
 Arena(std::byte\* buffer, std::size\_t cap);       // borrows the buffer
