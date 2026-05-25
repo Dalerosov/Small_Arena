@@ -44,9 +44,7 @@ struct Arena
 
     void reset_ownership()
     {
-        if (owns_buffer) {
-            buffer = nullptr;
-        }
+        buffer = nullptr;
         capacity = 0;
         offset = 0;
         owns_buffer = false;
