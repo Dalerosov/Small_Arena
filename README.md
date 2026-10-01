@@ -24,7 +24,7 @@ This implementation supports:
 ```cpp
 #include "Allocator.h"
 
-Arena arena(1024 \* 1024); // 1 MB, allocated internally
+Arena arena(1024 * 1024); // 1 MB, allocated internally
 
 auto\* data = static\_cast<int\*>(arena.alloc(sizeof(int) \* 100, alignof(int)));
 // use data...
