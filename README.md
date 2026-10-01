@@ -26,7 +26,7 @@ This implementation supports:
 
 Arena arena(1024 * 1024); // 1 MB, allocated internally
 
-auto\* data = static\_cast<int\*>(arena.alloc(sizeof(int) \* 100, alignof(int)));
+auto* data = static_cast<int*>(arena.alloc(sizeof(int) * 100, alignof(int)));
 // use data...
 
 arena.reset(); // drop everything at once, no individual frees needed
@@ -35,10 +35,10 @@ arena.reset(); // drop everything at once, no individual frees needed
 ### Borrowed buffer (stack or static)
 
 ```cpp
-alignas(64) std::byte buf\[4096];
+alignas(64) std::byte buf[4096];
 Arena arena(buf, sizeof(buf)); // arena does not own or free this buffer
 
-auto\* vec = static\_cast<float\*>(arena.alloc(sizeof(float) \* 3, alignof(float)));
+auto* vec = static_cast<float*>(arena.alloc(sizeof(float) * 3, alignof(float)));
 ```
 
 ### Snapshot / restore (temporary scratch space)
@@ -46,8 +46,8 @@ auto\* vec = static\_cast<float\*>(arena.alloc(sizeof(float) \* 3, alignof(float
 ```cpp
 Arena arena(65536);
 
-std::size\_t mark = arena.used();       // save position
-auto\* tmp = arena.alloc(1024);         // temporary allocation
+std::size_t mark = arena.used();       // save position
+auto* tmp = arena.alloc(1024);         // temporary allocation
 // ... do work with tmp ...
 arena.restore(mark);                   // reclaim that memory
 ```
@@ -58,16 +58,16 @@ arena.restore(mark);                   // reclaim that memory
 
 ```cpp
 // Constructors
-Arena(std::size\_t cap);                          // owns the buffer
-Arena(std::byte\* buffer, std::size\_t cap);       // borrows the buffer
+Arena(std::size_t cap);                          // owns the buffer
+Arena(std::byte* buffer, std::size_t cap);       // borrows the buffer
 
 // Allocation
-void\* alloc(std::size\_t size, std::size\_t alignment = alignof(std::max\_align\_t));
+void* alloc(std::size_t size, std::size_t alignment = alignof(std::max_align_t));
 
 // Reset / inspect
 void   reset();                  // reset offset to 0 (does not clear memory)
-void   restore(std::size\_t mark); // restore offset to a saved position
-std::size\_t used() const;        // bytes used
-std::size\_t remaining() const;   // bytes remaining
+void   restore(std::size_t mark); // restore offset to a saved position
+std::size_t used() const;        // bytes used
+std::size_t remaining() const;   // bytes remaining
 ```
 
